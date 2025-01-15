@@ -1,0 +1,213 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+/* Response Message Styling */
+.response {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.response.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.response.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Table Styling */
+#needsTable, #desiresTable, #investmentsTable, #salaryTable {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    display: none;
+}
+
+#needsTable th, #desiresTable th, #investmentsTable th, #salaryTable th,
+#needsTable td, #desiresTable td, #investmentsTable td, #salaryTable td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+#needsTable th, #salaryTable th {
+    background-color: #68dc83;  /* Green for salary/needs */
+}
+
+#desiresTable th {
+    background-color: #bc7379;  /* Red for desires */
+}
+
+#investmentsTable th {
+    background-color: #61e1c5;  /* Blue-green for investments */
+}
+
+#needsTable tbody tr, #salaryTable tbody tr {
+    background-color: #d2e5d7;
+}
+
+#desiresTable tbody tr {
+    background-color: #f2dede;  /* Lighter red for desires */
+}
+
+#investmentsTable tbody tr {
+    background-color: #d6f6f3;  /* Light blue-green for investments */
+}
+
+#needsTable tbody tr:hover, #salaryTable tbody tr:hover {
+    background-color: #e7f7e3;  /* Light green hover */
+}
+
+#desiresTable tbody tr:hover {
+    background-color: #f9caca;  /* Light red hover */
+}
+
+#investmentsTable tbody tr:hover {
+    background-color: #c7f0f3;  /* Light blue-green hover */
+}
+
+#needsTable tbody tr:nth-child(even), #salaryTable tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#desiresTable tbody tr:nth-child(even) {
+    background-color: #f7e6e6;
+}
+
+#investmentsTable tbody tr:nth-child(even) {
+    background-color: #e1f1f1;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-field {
+    width: 100%; /* Increase width to 100% to occupy the entire width of the container */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.submit-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .input-field {
+        width: 100%; /* Ensures full width on smaller screens */
+        margin-right: 0;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+    }
+}
+
+/* Modal (Success Alert) Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0,0.4); /* Black with opacity */
+    overflow: auto; /* Enable scroll if needed */
+    padding-top: 10px;
+}
+
+.modal-content {
+    background-color: #1cd948; /* Light green background */
+    margin: 5% auto;
+    padding: 6px;
+    border: 2px solid #c3e6cb;
+    width: 30%; /* Could be more or less depending on screen size */
+    border-radius: 2px;
+    text-align: center;
+}
+
+.close {
+    color: #155724; /* Dark green color */
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #721c24; /* Darker color when hovering */
+    text-decoration: none;
+    cursor: pointer;
+}
