@@ -1,0 +1,5 @@
+DB_USER=avnadmin
+DB_HOST=pg-2c09ca32-reddymr2018-17d3.f.aivencloud.com
+DB_DATABASE=defaultdb
+DB_PASSWORD=AVNS_8VkbAFhLKyGXSHldwgK
+DB_PORT=13195
