@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Front-End with Local Storage</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,9 +29,9 @@
     <script>
         // Sample data to store in local storage if not already available
         const sampleData = [
-            { id: 1, need: 'Rent', amount: 5000},
-            { id: 2, need: 'Groceries', amount: 6000},
-            { id: 3, name: 'Travel', amount: 3000}
+            { id: 1, need: 'Rent', amount: 5000 },
+            { id: 2, need: 'Groceries', amount: 6000 },
+            { id: 3, need: 'Travel', amount: 3000 }
         ];
 
         // Save sample data to local storage if it's not already there
@@ -26,18 +39,55 @@
             localStorage.setItem("users", JSON.stringify(sampleData));
         }
 
-        // Function to fetch data from local storage and display it
+        // Function to fetch data from local storage and display it in table format
         document.getElementById("fetchDataBtn").addEventListener("click", function() {
             const dataContainer = document.getElementById("dataContainer");
             const users = JSON.parse(localStorage.getItem("users")); // Get the data from local storage
             dataContainer.innerHTML = ""; // Clear previous content
 
             if (users && users.length > 0) {
+                // Create table
+                const table = document.createElement("table");
+
+                // Create table header
+                const headerRow = document.createElement("tr");
+                const headerID = document.createElement("th");
+                headerID.textContent = "ID";
+                const headerNeed = document.createElement("th");
+                headerNeed.textContent = "Need";
+                const headerAmount = document.createElement("th");
+                headerAmount.textContent = "Amount";
+
+                // Append headers to the header row
+                headerRow.appendChild(headerID);
+                headerRow.appendChild(headerNeed);
+                headerRow.appendChild(headerAmount);
+                table.appendChild(headerRow);
+
+                // Create table rows for each data item
                 users.forEach(item => {
-                    const dataDiv = document.createElement("div");
-                    dataDiv.textContent = `ID: ${item.id}, Name: ${item.name}`;
-                    dataContainer.appendChild(dataDiv);
+                    const row = document.createElement("tr");
+
+                    const cellID = document.createElement("td");
+                    cellID.textContent = item.id;
+
+                    const cellNeed = document.createElement("td");
+                    cellNeed.textContent = item.need;
+
+                    const cellAmount = document.createElement("td");
+                    cellAmount.textContent = item.amount;
+
+                    // Append the cells to the row
+                    row.appendChild(cellID);
+                    row.appendChild(cellNeed);
+                    row.appendChild(cellAmount);
+
+                    // Append the row to the table
+                    table.appendChild(row);
                 });
+
+                // Append the table to the container
+                dataContainer.appendChild(table);
             } else {
                 dataContainer.innerHTML = "No data available.";
             }
