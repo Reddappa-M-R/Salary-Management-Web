@@ -9,6 +9,8 @@
 <body>
     <div class="container">
         <h1>Salary Management Plan</h1>
+
+        <!-- Success Modal -->
         <div id="successModal" class="modal" style="display:none;">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -16,91 +18,94 @@
             </div>
         </div>
         
-        <!-- Fetch and Create Needs Section -->
-        <div>
-            <!-- <button id="showMoreBtn" style="display: none;">Show More</button> -->
-
+        <!-- Navigation Links -->
+        <div class="nav">
             <button id="fetchNeedsBtn">Fetch Needs</button>
             <button id="createNeedsBtn">Create Need</button>
-        </div>
-        <div id="needsResponse" class="response"></div>
-        <table id="needsTable">
-            <thead>
-                <tr><th>Need</th><th>Amount</th><th>Date</th></tr>
-            </thead>
-            <tbody id="needsTableBody"></tbody>
-        </table>
-        <div id="createNeedsForm" style="display:none;">
-            <h3>Create a New Need</h3>
-            <div class="input-group">
-                <input type="text" id="needs" placeholder="Enter Need" class="input-field">
-                <input type="number" id="needsAmount" placeholder="Enter Amount" class="input-field">
-            </div>
-            <button id="submitCreateNeedsBtn" class="submit-btn">Submit New Need</button>
-        </div>
-
-        <!-- Fetch and Create Desires Section -->
-        <div>
             <button id="fetchDesiresBtn">Fetch Desires</button>
             <button id="createDesiresBtn">Create Desire</button>
-        </div>
-        <div id="desiresResponse" class="response"></div>
-        <table id="desiresTable">
-            <thead>
-                <tr><th>Desires</th><th>Amount</th><th>Date</th></tr>
-            </thead>
-            <tbody id="desiresTableBody"></tbody>
-        </table>
-        <div id="createDesiresForm" style="display:none;">
-            <h3>Create a New Desire</h3>
-            <div class="input-group">
-                <input type="text" id="desires" placeholder="Enter Desire" class="input-field">
-                <input type="number" id="desiresAmount" placeholder="Enter Amount" class="input-field">
-            </div>
-            <button id="submitCreateDesiresBtn" class="submit-btn">Submit New Desire</button>
-        </div>
-
-        <!-- Fetch and Create Investments Section -->
-        <div>
             <button id="fetchInvestmentsBtn">Fetch Investments</button>
             <button id="createInvestmentsBtn">Create Investment</button>
-        </div>
-        <div id="investmentsResponse" class="response"></div>
-        <table id="investmentsTable">
-            <thead>
-                <tr><th>Investment</th><th>Amount</th><th>Date</th></tr>
-            </thead>
-            <tbody id="investmentsTableBody"></tbody>
-        </table>
-        <div id="createInvestmentsForm" style="display:none;">
-            <h3>Create a New Investment</h3>
-            <div class="input-group">
-                <input type="text" id="investments" placeholder="Enter Investment" class="input-field">
-                <input type="number" id="investmentsAmount" placeholder="Enter Amount" class="input-field">
-            </div>
-            <button id="submitCreateInvestmentsBtn" class="submit-btn">Submit New Investment</button>
-        </div>
-
-        <!-- Fetch and Create Salary Section -->
-        <div>
             <button id="fetchSalaryBtn">Fetch Salary</button>
             <button id="createSalaryBtn">Create Salary</button>
         </div>
-        <div id="salaryResponse" class="response"></div>
-        <table id="salaryTable">
-            <thead>
-                <tr><th>Salary</th><th>Amount</th><th>Date</th></tr>
-            </thead>
-            <tbody id="salaryTableBody"></tbody>
-        </table>
-        <div id="createSalaryForm" style="display:none;">
-            <h3>Create a New Salary</h3>
-            <div class="input-group">
-                <input type="text" id="salary" placeholder="Enter Salary" class="input-field">
-                <input type="number" id="salaryAmount" placeholder="Enter Amount" class="input-field">
+
+        <!-- Needs Section -->
+        <section id="needsSection">
+            <div id="needsResponse" class="response"></div>
+            <table id="needsTable">
+                <thead>
+                    <tr><th>Need</th><th>Amount</th><th>Date</th></tr>
+                </thead>
+                <tbody id="needsTableBody"></tbody>
+            </table>
+            <div id="createNeedsForm" style="display:none;">
+                <h3>Create a New Need</h3>
+                <div class="input-group">
+                    <input type="text" id="needs" placeholder="Enter Need" class="input-field">
+                    <input type="number" id="needsAmount" placeholder="Enter Amount" class="input-field">
+                </div>
+                <button id="submitCreateNeedsBtn" class="submit-btn">Submit New Need</button>
             </div>
-            <button id="submitCreateSalaryBtn" class="submit-btn">Submit New Salary</button>
-        </div>
+        </section>
+
+        <!-- Desires Section -->
+        <section id="desiresSection">
+            <div id="desiresResponse" class="response"></div>
+            <table id="desiresTable">
+                <thead>
+                    <tr><th>Desires</th><th>Amount</th><th>Date</th></tr>
+                </thead>
+                <tbody id="desiresTableBody"></tbody>
+            </table>
+            <div id="createDesiresForm" style="display:none;">
+                <h3>Create a New Desire</h3>
+                <div class="input-group">
+                    <input type="text" id="desires" placeholder="Enter Desire" class="input-field">
+                    <input type="number" id="desiresAmount" placeholder="Enter Amount" class="input-field">
+                </div>
+                <button id="submitCreateDesiresBtn" class="submit-btn">Submit New Desire</button>
+            </div>
+        </section>
+
+        <!-- Investments Section -->
+        <section id="investmentsSection">
+            <div id="investmentsResponse" class="response"></div>
+            <table id="investmentsTable">
+                <thead>
+                    <tr><th>Investment</th><th>Amount</th><th>Date</th></tr>
+                </thead>
+                <tbody id="investmentsTableBody"></tbody>
+            </table>
+            <div id="createInvestmentsForm" style="display:none;">
+                <h3>Create a New Investment</h3>
+                <div class="input-group">
+                    <input type="text" id="investments" placeholder="Enter Investment" class="input-field">
+                    <input type="number" id="investmentsAmount" placeholder="Enter Amount" class="input-field">
+                </div>
+                <button id="submitCreateInvestmentsBtn" class="submit-btn">Submit New Investment</button>
+            </div>
+        </section>
+
+        <!-- Salary Section -->
+        <section id="salarySection">
+            <div id="salaryResponse" class="response"></div>
+            <table id="salaryTable">
+                <thead>
+                    <tr><th>Salary</th><th>Amount</th><th>Date</th></tr>
+                </thead>
+                <tbody id="salaryTableBody"></tbody>
+            </table>
+            <div id="createSalaryForm" style="display:none;">
+                <h3>Create a New Salary</h3>
+                <div class="input-group">
+                    <input type="text" id="salary" placeholder="Enter Salary" class="input-field">
+                    <input type="number" id="salaryAmount" placeholder="Enter Amount" class="input-field">
+                </div>
+                <button id="submitCreateSalaryBtn" class="submit-btn">Submit New Salary</button>
+            </div>
+        </section>
+
     </div>
 
     <script src="app.js"></script>
