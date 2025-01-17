@@ -12,81 +12,113 @@ const pool = new Pool({
     port: 13195,
 });
 
-app.use(express.json());
+app.use(express.json());  // Middleware to parse JSON data
+
+// Function to handle database queries with pagination
+const getPaginatedData = async (table, page, limit) => {
+    try {
+        const offset = (page - 1) * limit;
+        const query = `SELECT * FROM ${table} ORDER BY date DESC LIMIT $1 OFFSET $2`;
+        const result = await pool.query(query, [limit, offset]);
+        return result.rows;
+    } catch (error) {
+        throw new Error(`Error fetching data from ${table}: ${error.message}`);
+    }
+};
 
 // Fetch data for needs
 app.get('/needs', async (req, res) => {
+    const page = parseInt(req.query.page) || 1; // Get the page number from query params
+    const limit = parseInt(req.query.limit) || 10; // Get the limit from query params
     try {
-        const result = await pool.query('SELECT * FROM needs ORDER BY date DESC LIMIT 10');
-        res.json({ status_code: 200, data: result.rows });
+        const data = await getPaginatedData('needs', page, limit);
+        res.json({ status_code: 200, data });
     } catch (error) {
         console.error('Error fetching data from needs:', error);
-        res.status(500).json({ status_code: 500, message: 'Error fetching data' });
+        res.status(500).json({ status_code: 500, message: error.message });
     }
 });
 
 // Fetch data for desires
 app.get('/desires', async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
     try {
-        const result = await pool.query('SELECT * FROM desires ORDER BY date DESC LIMIT 10');
-        res.json({ status_code: 200, data: result.rows });
+        const data = await getPaginatedData('desires', page, limit);
+        res.json({ status_code: 200, data });
     } catch (error) {
         console.error('Error fetching data from desires:', error);
-        res.status(500).json({ status_code: 500, message: 'Error fetching data' });
+        res.status(500).json({ status_code: 500, message: error.message });
     }
 });
 
 // Fetch data for investments
 app.get('/investments', async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
     try {
-        const result = await pool.query('SELECT * FROM investments ORDER BY date DESC LIMIT 10');
-        res.json({ status_code: 200, data: result.rows });
+        const data = await getPaginatedData('investments', page, limit);
+        res.json({ status_code: 200, data });
     } catch (error) {
         console.error('Error fetching data from investments:', error);
-        res.status(500).json({ status_code: 500, message: 'Error fetching data' });
+        res.status(500).json({ status_code: 500, message: error.message });
     }
 });
 
 // Fetch data for salary
 app.get('/salary', async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
     try {
-        const result = await pool.query('SELECT * FROM salary ORDER BY date DESC LIMIT 10');
-        res.json({ status_code: 200, data: result.rows });
+        const data = await getPaginatedData('salary', page, limit);
+        res.json({ status_code: 200, data });
     } catch (error) {
         console.error('Error fetching data from salary:', error);
-        res.status(500).json({ status_code: 500, message: 'Error fetching data' });
+        res.status(500).json({ status_code: 500, message: error.message });
     }
 });
 
 // Insert data into needs
 app.post('/needs', async (req, res) => {
     const { Needs, amount } = req.body;
+    if (!Needs || !amount) {
+        return res.status(400).json({ status_code: 400, message: 'Needs and amount are required' });
+    }
     try {
-        await pool.query('INSERT INTO needs (needs, amount) VALUES ($1, $2)', [Needs, amount]);
-        res.json({ status_code: 200, message: 'Needs created successfully!' });
+        const query = 'INSERT INTO needs (needs, amount, date) VALUES ($1, $2, NOW())';
+        await pool.query(query, [Needs, amount]);
+        res.json({ status_code: 200, message: 'Need created successfully!' });
     } catch (error) {
         console.error('Error inserting data into needs:', error);
-        res.status(500).json({ status_code: 500, message: 'Error creating needs' });
+        res.status(500).json({ status_code: 500, message: 'Error creating need' });
     }
 });
 
 // Insert data into desires
 app.post('/desires', async (req, res) => {
     const { Desires, amount } = req.body;
+    if (!Desires || !amount) {
+        return res.status(400).json({ status_code: 400, message: 'Desires and amount are required' });
+    }
     try {
-        await pool.query('INSERT INTO desires (desires, amount) VALUES ($1, $2)', [Desires, amount]);
-        res.json({ status_code: 200, message: 'Desires created successfully!' });
+        const query = 'INSERT INTO desires (desires, amount, date) VALUES ($1, $2, NOW())';
+        await pool.query(query, [Desires, amount]);
+        res.json({ status_code: 200, message: 'Desire created successfully!' });
     } catch (error) {
         console.error('Error inserting data into desires:', error);
-        res.status(500).json({ status_code: 500, message: 'Error creating desires' });
+        res.status(500).json({ status_code: 500, message: 'Error creating desire' });
     }
 });
 
 // Insert data into investments
 app.post('/investments', async (req, res) => {
     const { Investment, amount } = req.body;
+    if (!Investment || !amount) {
+        return res.status(400).json({ status_code: 400, message: 'Investment and amount are required' });
+    }
     try {
-        await pool.query('INSERT INTO investments (investment, amount) VALUES ($1, $2)', [Investment, amount]);
+        const query = 'INSERT INTO investments (investment, amount, date) VALUES ($1, $2, NOW())';
+        await pool.query(query, [Investment, amount]);
         res.json({ status_code: 200, message: 'Investment created successfully!' });
     } catch (error) {
         console.error('Error inserting data into investments:', error);
@@ -97,8 +129,12 @@ app.post('/investments', async (req, res) => {
 // Insert data into salary
 app.post('/salary', async (req, res) => {
     const { Salary, amount } = req.body;
+    if (!Salary || !amount) {
+        return res.status(400).json({ status_code: 400, message: 'Salary and amount are required' });
+    }
     try {
-        await pool.query('INSERT INTO salary (salary, amount) VALUES ($1, $2)', [Salary, amount]);
+        const query = 'INSERT INTO salary (salary, amount, date) VALUES ($1, $2, NOW())';
+        await pool.query(query, [Salary, amount]);
         res.json({ status_code: 200, message: 'Salary created successfully!' });
     } catch (error) {
         console.error('Error inserting data into salary:', error);
