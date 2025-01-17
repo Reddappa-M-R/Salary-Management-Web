@@ -3,111 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Management Plan</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Simple Front-End with Local Storage</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Salary Management Plan</h1>
-
-        <!-- Success Modal -->
-        <div id="successModal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p id="successMessage"></p>
-            </div>
-        </div>
-        
-        <!-- Navigation Links -->
-        <div class="nav">
-            <button id="fetchNeedsBtn">Fetch Needs</button>
-            <button id="createNeedsBtn">Create Need</button>
-            <button id="fetchDesiresBtn">Fetch Desires</button>
-            <button id="createDesiresBtn">Create Desire</button>
-            <button id="fetchInvestmentsBtn">Fetch Investments</button>
-            <button id="createInvestmentsBtn">Create Investment</button>
-            <button id="fetchSalaryBtn">Fetch Salary</button>
-            <button id="createSalaryBtn">Create Salary</button>
-        </div>
-
-        <!-- Needs Section -->
-        <section id="needsSection">
-            <div id="needsResponse" class="response"></div>
-            <table id="needsTable">
-                <thead>
-                    <tr><th>Need</th><th>Amount</th><th>Date</th></tr>
-                </thead>
-                <tbody id="needsTableBody"></tbody>
-            </table>
-            <div id="createNeedsForm" style="display:none;">
-                <h3>Create a New Need</h3>
-                <div class="input-group">
-                    <input type="text" id="needs" placeholder="Enter Need" class="input-field">
-                    <input type="number" id="needsAmount" placeholder="Enter Amount" class="input-field">
-                </div>
-                <button id="submitCreateNeedsBtn" class="submit-btn">Submit New Need</button>
-            </div>
-        </section>
-
-        <!-- Desires Section -->
-        <section id="desiresSection">
-            <div id="desiresResponse" class="response"></div>
-            <table id="desiresTable">
-                <thead>
-                    <tr><th>Desires</th><th>Amount</th><th>Date</th></tr>
-                </thead>
-                <tbody id="desiresTableBody"></tbody>
-            </table>
-            <div id="createDesiresForm" style="display:none;">
-                <h3>Create a New Desire</h3>
-                <div class="input-group">
-                    <input type="text" id="desires" placeholder="Enter Desire" class="input-field">
-                    <input type="number" id="desiresAmount" placeholder="Enter Amount" class="input-field">
-                </div>
-                <button id="submitCreateDesiresBtn" class="submit-btn">Submit New Desire</button>
-            </div>
-        </section>
-
-        <!-- Investments Section -->
-        <section id="investmentsSection">
-            <div id="investmentsResponse" class="response"></div>
-            <table id="investmentsTable">
-                <thead>
-                    <tr><th>Investment</th><th>Amount</th><th>Date</th></tr>
-                </thead>
-                <tbody id="investmentsTableBody"></tbody>
-            </table>
-            <div id="createInvestmentsForm" style="display:none;">
-                <h3>Create a New Investment</h3>
-                <div class="input-group">
-                    <input type="text" id="investments" placeholder="Enter Investment" class="input-field">
-                    <input type="number" id="investmentsAmount" placeholder="Enter Amount" class="input-field">
-                </div>
-                <button id="submitCreateInvestmentsBtn" class="submit-btn">Submit New Investment</button>
-            </div>
-        </section>
-
-        <!-- Salary Section -->
-        <section id="salarySection">
-            <div id="salaryResponse" class="response"></div>
-            <table id="salaryTable">
-                <thead>
-                    <tr><th>Salary</th><th>Amount</th><th>Date</th></tr>
-                </thead>
-                <tbody id="salaryTableBody"></tbody>
-            </table>
-            <div id="createSalaryForm" style="display:none;">
-                <h3>Create a New Salary</h3>
-                <div class="input-group">
-                    <input type="text" id="salary" placeholder="Enter Salary" class="input-field">
-                    <input type="number" id="salaryAmount" placeholder="Enter Amount" class="input-field">
-                </div>
-                <button id="submitCreateSalaryBtn" class="submit-btn">Submit New Salary</button>
-            </div>
-        </section>
-
+        <h1>Welcome to My Web App</h1>
+        <button id="fetchDataBtn">Fetch Data</button>
+        <div id="dataContainer"></div>
     </div>
 
-    <script src="app.js"></script>
+    <script>
+        // Sample data to store in local storage if not already available
+        const sampleData = [
+            { id: 1, name: 'John Doe' },
+            { id: 2, name: 'Jane Smith' },
+            { id: 3, name: 'Alice Johnson' }
+        ];
+
+        // Save sample data to local storage if it's not already there
+        if (!localStorage.getItem("users")) {
+            localStorage.setItem("users", JSON.stringify(sampleData));
+        }
+
+        // Function to fetch data from local storage and display it
+        document.getElementById("fetchDataBtn").addEventListener("click", function() {
+            const dataContainer = document.getElementById("dataContainer");
+            const users = JSON.parse(localStorage.getItem("users")); // Get the data from local storage
+            dataContainer.innerHTML = ""; // Clear previous content
+
+            if (users && users.length > 0) {
+                users.forEach(item => {
+                    const dataDiv = document.createElement("div");
+                    dataDiv.textContent = `ID: ${item.id}, Name: ${item.name}`;
+                    dataContainer.appendChild(dataDiv);
+                });
+            } else {
+                dataContainer.innerHTML = "No data available.";
+            }
+        });
+    </script>
 </body>
 </html>
