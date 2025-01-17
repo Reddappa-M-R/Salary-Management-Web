@@ -5,11 +5,11 @@ const port = 8000;
 
 // Set up the PostgreSQL connection pool
 const pool = new Pool({
-    user: 'your-username',
-    host: 'localhost',
-    database: 'your-database-name',
-    password: 'your-password',
-    port: 5432,
+    user: 'avnadmin',
+    host: 'pg-2c09ca32-reddymr2018-17d3.f.aivencloud.com',
+    database: 'defaultdb',
+    password: 'AVNS_8VkbAFhLKyGXSHldwgK',
+    port: 13195,
 });
 
 app.use(express.json());
